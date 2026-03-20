@@ -1,5 +1,5 @@
 import React, { useState, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, Float, ContactShadows, Preload } from '@react-three/drei';
 import { motion, AnimatePresence } from 'motion/react';
 import { useGame } from '../../context/GameContext';
@@ -22,6 +22,19 @@ const ACCESSORIES = [
   { id: 'HAT', name: 'Hat', nameFil: 'Sumbrero', icon: '🎩' },
   { id: 'SCARF', name: 'Scarf', nameFil: 'Iskarp', icon: '🧣' },
 ];
+
+const ResponsiveCamera = () => {
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 5;
+  
+  return (
+    <PerspectiveCamera 
+      makeDefault 
+      position={isMobile ? [0, 1.2, 5.5] : [0, 1.2, 4.5]} 
+      fov={isMobile ? 60 : 50} 
+    />
+  );
+};
 
 export const CharacterCustomization = () => {
   const { customization, setCustomization, setMode, language } = useGame();
@@ -56,11 +69,11 @@ export const CharacterCustomization = () => {
       {/* 3D Preview */}
       <div className="flex-1 relative h-[40vh] md:h-full bg-slate-100">
         <Canvas shadows dpr={[1, 2]}>
-          <PerspectiveCamera makeDefault position={[0, 1.2, 4.5]} fov={40} />
+          <ResponsiveCamera />
           <OrbitControls 
             enablePan={false} 
             minDistance={2.5} 
-            maxDistance={6} 
+            maxDistance={8} 
             maxPolarAngle={Math.PI / 1.5}
             minPolarAngle={Math.PI / 3}
             target={[0, 0.6, 0]}
@@ -71,7 +84,7 @@ export const CharacterCustomization = () => {
           <pointLight position={[-10, -10, -10]} intensity={1} />
           
           <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-            <CharacterModel />
+            <CharacterModel customization={customization} />
           </Float>
           <ContactShadows position={[0, -0.5, 0]} opacity={0.4} scale={10} blur={2} far={4.5} />
           

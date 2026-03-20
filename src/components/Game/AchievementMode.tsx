@@ -8,7 +8,7 @@ import { PerspectiveCamera, Environment, Float } from '@react-three/drei';
 import { CharacterModel } from './CharacterModel';
 
 export const AchievementMode = () => {
-  const { setMode, achievements, language } = useGame();
+  const { setMode, achievements, language, customization } = useGame();
   const isFil = language === 'FIL';
 
   const handleBack = () => {
@@ -24,7 +24,7 @@ export const AchievementMode = () => {
           <ambientLight intensity={0.8} />
           <Suspense fallback={null}>
             <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-              <CharacterModel />
+              <CharacterModel customization={customization} />
             </Float>
             <Environment preset="city" />
           </Suspense>

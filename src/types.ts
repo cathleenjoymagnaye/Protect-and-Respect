@@ -1,4 +1,4 @@
-export type GameMode = 'INTRO' | 'CUSTOMIZE' | 'HOME' | 'RUNNER' | 'STUDY' | 'LIBRARY' | 'ACHIEVEMENTS' | 'SPORTS';
+export type GameMode = 'INTRO' | 'CUSTOMIZE' | 'HOME' | 'RUNNER' | 'STUDY' | 'LIBRARY' | 'ACHIEVEMENTS' | 'SPORTS' | 'CHAT';
 
 export interface CharacterCustomization {
   name: string;

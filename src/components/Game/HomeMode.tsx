@@ -1,13 +1,26 @@
-import React, { useRef, useMemo, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useRef, useMemo, Suspense, useState, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, Stars, Float, ContactShadows, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGame } from '../../context/GameContext';
 import { motion } from 'motion/react';
-import { Apple, Bed, Heart, Smile, Coffee, Gamepad2, Sparkles, Trophy, Activity, Languages } from 'lucide-react';
+import { Apple, Bed, Heart, Smile, Coffee, Gamepad2, Sparkles, Trophy, Activity, Languages, MessageCircle } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { CharacterModel } from './CharacterModel';
 import { Room } from './Room';
+
+const ResponsiveCamera = () => {
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 5;
+  
+  return (
+    <PerspectiveCamera 
+      makeDefault 
+      position={isMobile ? [0, 1.6, 5.5] : [0, 1.8, 4.5]} 
+      fov={isMobile ? 60 : 50} 
+    />
+  );
+};
 
 export const HomeMode = () => {
   const { stats, updateStats, customization, score, setMode, language, setLanguage } = useGame();
@@ -24,11 +37,11 @@ export const HomeMode = () => {
     <div className="absolute inset-0 bg-slate-100 overflow-hidden">
       {/* 3D Scene */}
       <Canvas shadows dpr={[1, 2]}>
-        <PerspectiveCamera makeDefault position={[0, 1.8, 4.5]} fov={50} />
+        <ResponsiveCamera />
         <OrbitControls 
           enablePan={false} 
           minDistance={2} 
-          maxDistance={7} 
+          maxDistance={8} 
           maxPolarAngle={Math.PI / 2}
           autoRotate={false}
           target={[0, 0.7, 0]}
@@ -48,7 +61,7 @@ export const HomeMode = () => {
         <Room />
         <group position={[0, -0.45, 0]}>
           <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
-            <CharacterModel />
+            <CharacterModel customization={customization} />
           </Float>
         </group>
         
@@ -98,6 +111,12 @@ export const HomeMode = () => {
                 <div className="px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-[10px] font-black text-indigo-600 uppercase tracking-widest">
                   LVL {Math.floor(score / 100) + 1}
                 </div>
+                <button 
+                  onClick={() => handleModeChange('CHAT')}
+                  className="p-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-600 hover:bg-blue-500/20 transition-all pointer-events-auto"
+                >
+                  <MessageCircle size={14} />
+                </button>
                 <button 
                   onClick={() => handleModeChange('ACHIEVEMENTS')}
                   className="p-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-600 hover:bg-amber-500/20 transition-all pointer-events-auto"

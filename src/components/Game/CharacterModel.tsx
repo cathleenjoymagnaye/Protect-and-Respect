@@ -1,15 +1,15 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useGame } from '../../context/GameContext';
+import { CharacterCustomization } from '../../types';
 
 interface CharacterModelProps {
+  customization: CharacterCustomization;
   hasShield?: boolean;
   isRunning?: boolean;
 }
 
-export const CharacterModel: React.FC<CharacterModelProps> = ({ hasShield, isRunning }) => {
-  const { customization } = useGame();
+export const CharacterModel: React.FC<CharacterModelProps> = ({ customization, hasShield, isRunning }) => {
   const groupRef = useRef<THREE.Group>(null);
   const armLRef = useRef<THREE.Mesh>(null);
   const armRRef = useRef<THREE.Mesh>(null);

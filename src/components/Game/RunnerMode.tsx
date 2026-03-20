@@ -22,7 +22,7 @@ interface ObstacleData {
 
 import { CharacterModel } from './CharacterModel';
 
-const Player = ({ lane, hasShield }: { lane: number, hasShield: boolean }) => {
+const Player = ({ lane, hasShield, customization }: { lane: number, hasShield: boolean, customization: any }) => {
   const meshRef = useRef<THREE.Group>(null);
   const targetX = (lane - 1) * LANE_WIDTH;
 
@@ -35,7 +35,7 @@ const Player = ({ lane, hasShield }: { lane: number, hasShield: boolean }) => {
 
   return (
     <group ref={meshRef} position={[0, 0, 0]}>
-      <CharacterModel hasShield={hasShield} isRunning={true} />
+      <CharacterModel customization={customization} hasShield={hasShield} isRunning={true} />
     </group>
   );
 };
@@ -267,7 +267,7 @@ const WindParticles = ({ speed }: { speed: number }) => {
 };
 
 export const RunnerMode = () => {
-  const { setMode, score, setScore, updateStats, unlockAchievement, language } = useGame();
+  const { setMode, score, setScore, updateStats, unlockAchievement, language, customization } = useGame();
   const [lane, setLane] = useState(1);
   const [obstacles, setObstacles] = useState<ObstacleData[]>([]);
   const [gameState, setGameState] = useState<'START' | 'PLAYING' | 'GAMEOVER'>('START');
@@ -413,7 +413,7 @@ export const RunnerMode = () => {
         <Suspense fallback={null}>
           <Environment preset="city" />
         </Suspense>
-        <Player lane={lane} hasShield={hasShield} />
+        <Player lane={lane} hasShield={hasShield} customization={customization} />
         {obstacles.map(o => (
           <Obstacle key={o.id} data={o} speed={speed} />
         ))}

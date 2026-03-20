@@ -6,10 +6,11 @@ import { StudyMode } from './components/Game/StudyMode';
 import { LibraryMode } from './components/Game/LibraryMode';
 import { AchievementMode } from './components/Game/AchievementMode';
 import { SportsMode } from './components/Game/SportsMode';
+import { ChatMode } from './components/Game/ChatMode';
 import { OpeningScene } from './components/Game/OpeningScene';
 import { CharacterCustomization } from './components/Game/CharacterCustomization';
 import { motion, AnimatePresence } from 'motion/react';
-import { Home, Play, GraduationCap, BookOpen, Trophy, Activity } from 'lucide-react';
+import { Home, Play, GraduationCap, BookOpen, Trophy, Activity, MessageCircle } from 'lucide-react';
 import { cn } from './lib/utils';
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
       case 'LIBRARY': return <LibraryMode />;
       case 'ACHIEVEMENTS': return <AchievementMode />;
       case 'SPORTS': return <SportsMode />;
+      case 'CHAT': return <ChatMode />;
       default: return <OpeningScene />;
     }
   };
@@ -97,6 +99,14 @@ export default function App() {
               label="Sports" 
               color="text-orange-600" 
               bgColor="bg-orange-50" 
+            />
+            <NavButton 
+              active={mode === 'CHAT'} 
+              onClick={() => handleNavClick('CHAT')} 
+              icon={<MessageCircle size={18} />} 
+              label="Ask AI" 
+              color="text-blue-600" 
+              bgColor="bg-blue-50" 
             />
             <NavButton 
               active={mode === 'ACHIEVEMENTS'} 
