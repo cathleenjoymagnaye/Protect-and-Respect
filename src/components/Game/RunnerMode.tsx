@@ -422,24 +422,24 @@ export const RunnerMode = () => {
       </Canvas>
 
       {/* HUD */}
-      <div className="absolute top-8 left-8 right-8 flex justify-between items-start pointer-events-none">
-        <div className="flex gap-4">
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-3xl shadow-2xl">
-            <span className="text-[10px] font-black text-blue-400 uppercase tracking-[0.2em] block mb-1">{isFil ? 'Puntos' : 'Score'}</span>
-            <span className="text-3xl font-mono font-bold text-white leading-none">{score}</span>
+      <div className="absolute top-4 left-4 right-4 md:top-8 md:left-8 md:right-8 flex justify-between items-start pointer-events-none z-10">
+        <div className="flex gap-2 md:gap-4">
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 px-4 py-2 md:px-6 md:py-3 rounded-2xl md:rounded-3xl shadow-2xl">
+            <span className="text-[8px] md:text-[10px] font-black text-blue-400 uppercase tracking-[0.2em] block mb-0.5 md:mb-1">{isFil ? 'Puntos' : 'Score'}</span>
+            <span className="text-xl md:text-3xl font-mono font-bold text-white leading-none">{score}</span>
           </div>
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-3xl shadow-2xl">
-            <span className="text-[10px] font-black text-emerald-400 uppercase tracking-[0.2em] block mb-1">{isFil ? 'Distansya' : 'Distance'}</span>
-            <span className="text-3xl font-mono font-bold text-white leading-none tracking-tighter">{distance}m</span>
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 px-4 py-2 md:px-6 md:py-3 rounded-2xl md:rounded-3xl shadow-2xl">
+            <span className="text-[8px] md:text-[10px] font-black text-emerald-400 uppercase tracking-[0.2em] block mb-0.5 md:mb-1">{isFil ? 'Distansya' : 'Distance'}</span>
+            <span className="text-xl md:text-3xl font-mono font-bold text-white leading-none tracking-tighter">{distance}m</span>
           </div>
         </div>
 
         {hasShield && (
           <div 
-            className="bg-blue-500/20 backdrop-blur-xl border border-blue-400/50 px-6 py-3 rounded-3xl flex items-center gap-3"
+            className="bg-blue-500/20 backdrop-blur-xl border border-blue-400/50 px-4 py-2 md:px-6 md:py-3 rounded-2xl md:rounded-3xl flex items-center gap-2 md:gap-3"
           >
-            <ShieldCheck className="text-blue-400" size={24} />
-            <div className="h-1.5 w-24 bg-blue-900/50 rounded-full overflow-hidden">
+            <ShieldCheck className="text-blue-400 w-5 h-5 md:w-6 md:h-6" />
+            <div className="h-1 w-16 md:h-1.5 md:w-24 bg-blue-900/50 rounded-full overflow-hidden">
               <div 
                 style={{ width: `${(shieldTime / 5000) * 100}%` }}
                 className="h-full bg-blue-400"

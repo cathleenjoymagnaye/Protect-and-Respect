@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, Stars, Float } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Environment, Stars, Float, ContactShadows, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGame } from '../../context/GameContext';
 import { motion } from 'motion/react';
@@ -24,35 +24,46 @@ export const HomeMode = () => {
     <div className="absolute inset-0 bg-slate-100 overflow-hidden">
       {/* 3D Scene */}
       <Canvas shadows dpr={[1, 2]}>
-        <PerspectiveCamera makeDefault position={[5, 4, 5]} fov={40} />
+        <PerspectiveCamera makeDefault position={[0, 1.8, 4.5]} fov={50} />
         <OrbitControls 
           enablePan={false} 
-          minDistance={4} 
-          maxDistance={12} 
-          maxPolarAngle={Math.PI / 2.1}
+          minDistance={2} 
+          maxDistance={7} 
+          maxPolarAngle={Math.PI / 2}
           autoRotate={false}
+          target={[0, 0.7, 0]}
         />
         
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} castShadow />
+        <ambientLight intensity={1.2} />
+        <pointLight position={[10, 10, 10]} intensity={2} castShadow />
         <spotLight 
           position={[-5, 10, 5]} 
-          angle={0.2} 
+          angle={0.25} 
           penumbra={1} 
-          intensity={2} 
+          intensity={3} 
           castShadow 
-          shadow-mapSize={[2048, 2048]}
+          shadow-mapSize={[1024, 1024]}
+        />
+        
+        <Room />
+        <group position={[0, -0.45, 0]}>
+          <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
+            <CharacterModel />
+          </Float>
+        </group>
+        
+        <ContactShadows 
+          position={[0, -0.48, 0]} 
+          opacity={0.4} 
+          scale={10} 
+          blur={2.5} 
+          far={4} 
         />
         
         <Suspense fallback={null}>
-          <Room />
-          <group position={[0, 0.1, 0]}>
-            <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
-              <CharacterModel />
-            </Float>
-          </group>
           <Environment preset="apartment" />
         </Suspense>
+        <Preload all />
       </Canvas>
 
       {/* UI Overlays */}

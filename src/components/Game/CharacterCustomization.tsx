@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, Float, ContactShadows } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Environment, Float, ContactShadows, Preload } from '@react-three/drei';
 import { motion, AnimatePresence } from 'motion/react';
 import { useGame } from '../../context/GameContext';
 import { CharacterModel } from './CharacterModel';
@@ -56,26 +56,29 @@ export const CharacterCustomization = () => {
       {/* 3D Preview */}
       <div className="flex-1 relative h-[40vh] md:h-full bg-slate-100">
         <Canvas shadows dpr={[1, 2]}>
-          <PerspectiveCamera makeDefault position={[0, 1.5, 4]} fov={35} />
+          <PerspectiveCamera makeDefault position={[0, 1.2, 4.5]} fov={40} />
           <OrbitControls 
             enablePan={false} 
-            minDistance={3} 
+            minDistance={2.5} 
             maxDistance={6} 
             maxPolarAngle={Math.PI / 1.5}
             minPolarAngle={Math.PI / 3}
+            target={[0, 0.6, 0]}
           />
           
-          <ambientLight intensity={0.8} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} />
+          <ambientLight intensity={1} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
+          <pointLight position={[-10, -10, -10]} intensity={1} />
+          
+          <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+            <CharacterModel />
+          </Float>
+          <ContactShadows position={[0, -0.5, 0]} opacity={0.4} scale={10} blur={2} far={4.5} />
           
           <Suspense fallback={null}>
-            <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-              <CharacterModel />
-            </Float>
-            <ContactShadows position={[0, -0.5, 0]} opacity={0.4} scale={10} blur={2} far={4.5} />
             <Environment preset="city" />
           </Suspense>
+          <Preload all />
         </Canvas>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">

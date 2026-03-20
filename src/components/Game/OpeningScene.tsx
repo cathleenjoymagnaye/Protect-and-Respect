@@ -41,12 +41,12 @@ export const OpeningScene = () => {
   return (
     <div className="absolute inset-0 bg-gradient-to-b from-cyan-400 via-sky-400 to-indigo-500 flex items-center justify-center overflow-hidden">
       {/* Language Toggle */}
-      <div className="absolute top-8 right-8 z-50">
+      <div className="absolute top-4 right-4 md:top-8 md:right-8 z-50">
         <button 
           onClick={() => setLanguage(language === 'EN' ? 'FIL' : 'EN')}
-          className="flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-black hover:bg-white/30 transition-all"
+          className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white text-sm md:text-base font-black hover:bg-white/30 transition-all"
         >
-          <Languages size={20} />
+          <Languages size={18} />
           {language === 'EN' ? 'ENGLISH' : 'FILIPINO'}
         </button>
       </div>
@@ -112,10 +112,10 @@ export const OpeningScene = () => {
             <RightIcon icon={<Activity size={18} />} color="bg-sky-400" delay={0.6} x={-70} y={50} />
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-4 drop-shadow-[0_12px_15px_rgba(0,0,0,0.3)]">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl font-black text-white tracking-tighter mb-4 drop-shadow-[0_12px_15px_rgba(0,0,0,0.3)]">
             {isFil ? 'PROTEKTA AT RESPETO' : 'PROTECT AND RESPECT'}
           </h1>
-          <p className="text-xl md:text-2xl font-bold text-amber-300 tracking-widest uppercase drop-shadow-md">
+          <p className="text-lg md:text-2xl font-bold text-amber-300 tracking-widest uppercase drop-shadow-md">
             {isFil ? 'PAGSULONG SA KAPAKANAN AT SEGURIDAD NG BATA' : 'PROMOTING CHILD WELFARE AND SECURITY'}
           </p>
         </motion.div>
@@ -124,11 +124,11 @@ export const OpeningScene = () => {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.8, duration: 0.8 }}
-          className="mt-12"
+          className="mt-8 md:mt-12"
         >
           <button
             onClick={handleStart}
-            className="group relative px-20 py-8 bg-amber-400 rounded-[40px] font-black text-slate-900 text-3xl shadow-[0_20px_50px_rgba(245,158,11,0.5)] hover:scale-110 active:scale-95 transition-all overflow-hidden border-b-[12px] border-amber-600"
+            className="group relative px-12 py-6 md:px-20 md:py-8 bg-amber-400 rounded-[32px] md:rounded-[40px] font-black text-slate-900 text-2xl md:text-3xl shadow-[0_20px_50px_rgba(245,158,11,0.5)] hover:scale-110 active:scale-95 transition-all overflow-hidden border-b-[8px] md:border-b-[12px] border-amber-600"
           >
             <span className="relative z-10 flex items-center gap-4">
               {isFil ? 'MAGLARO NA' : 'PLAY NOW'} <Sparkles size={32} className="text-white animate-pulse" />

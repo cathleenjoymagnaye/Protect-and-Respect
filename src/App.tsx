@@ -39,7 +39,7 @@ export default function App() {
   const showNav = mode !== 'INTRO' && mode !== 'CUSTOMIZE';
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-slate-50 font-sans text-slate-900 select-none overflow-hidden">
+    <div className="fixed inset-0 h-[100dvh] w-screen flex flex-col bg-slate-50 font-sans text-slate-900 select-none overflow-hidden">
       {/* Main Content Area */}
       <main className="flex-1 relative overflow-hidden">
         <AnimatePresence mode="wait">

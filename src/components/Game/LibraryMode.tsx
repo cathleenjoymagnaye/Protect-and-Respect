@@ -62,23 +62,23 @@ export const LibraryMode = () => {
                     onClick={() => handleSelectBook(book)}
                     className="w-full bg-stone-900 p-8 rounded-[40px] shadow-2xl shadow-stone-200 text-left flex items-center gap-8 group transition-all border border-stone-800"
                   >
-                    <div className="w-24 h-32 bg-stone-800 rounded-2xl flex-shrink-0 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
-                      <Bookmark size={48} fill="currentColor" />
+                    <div className="w-16 h-24 md:w-24 md:h-32 bg-stone-800 rounded-2xl flex-shrink-0 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                      <Bookmark size={32} className="md:w-12 md:h-12" fill="currentColor" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="px-3 py-1 bg-amber-500/10 text-amber-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-amber-500/20">
+                        <span className="px-2 py-0.5 md:px-3 md:py-1 bg-amber-500/10 text-amber-500 text-[8px] md:text-[10px] font-black uppercase tracking-widest rounded-full border border-amber-500/20">
                           {isFil ? (book.categoryFil || book.category) : book.category}
                         </span>
-                        <span className="text-stone-500 text-[10px] font-bold uppercase tracking-widest italic">{isFil ? 'Mahalagang Basahin' : 'Essential Reading'}</span>
+                        <span className="text-stone-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest italic">{isFil ? 'Mahalagang Basahin' : 'Essential Reading'}</span>
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight">{isFil ? (book.titleFil || book.title) : book.title}</h3>
-                      <p className="text-stone-400 text-sm md:text-base line-clamp-2 leading-relaxed font-medium">
+                      <h3 className="text-xl md:text-3xl font-black text-white mb-2 md:mb-3 tracking-tight">{isFil ? (book.titleFil || book.title) : book.title}</h3>
+                      <p className="text-stone-400 text-xs md:text-base line-clamp-2 leading-relaxed font-medium">
                         {isFil ? (book.contentFil || book.content) : book.content}
                       </p>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center text-white group-hover:bg-amber-500 transition-colors">
-                      <ChevronRight size={24} />
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-stone-800 flex items-center justify-center text-white group-hover:bg-amber-500 transition-colors">
+                      <ChevronRight size={20} className="md:w-6 md:h-6" />
                     </div>
                   </motion.button>
                 ))}
@@ -130,11 +130,11 @@ export const LibraryMode = () => {
 
             <div className="flex-1 overflow-y-auto p-8 md:p-16">
               <article className="max-w-2xl mx-auto">
-                <h1 className="text-4xl md:text-5xl font-bold text-stone-900 mb-12 leading-tight">
+                <h1 className="text-3xl md:text-5xl font-bold text-stone-900 mb-8 md:mb-12 leading-tight">
                   {isFil ? (selectedBook.titleFil || selectedBook.title) : selectedBook.title}
                 </h1>
                 <div className="prose prose-stone prose-lg max-w-none">
-                  <p className="text-stone-700 leading-relaxed text-xl whitespace-pre-wrap">
+                  <p className="text-stone-700 leading-relaxed text-lg md:text-xl whitespace-pre-wrap">
                     {isFil ? (selectedBook.contentFil || selectedBook.content) : selectedBook.content}
                   </p>
                 </div>
